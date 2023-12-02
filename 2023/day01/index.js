@@ -18,7 +18,6 @@ function partOne(input) {
   return digits.reduce((a, b) => a + b);
 }
 
-// partOne(data);
 log("Part One Calibration:", partOne(data));
 
 function partTwo(input) {
