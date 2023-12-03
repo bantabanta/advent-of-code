@@ -53,10 +53,3 @@ function partTwo(input) {
 }
 
 console.log("Part Two Calibration:", partTwo(data));
-
-const inputString = "one:two,three,four,five";
-const specifiedElement = "two";
-
-const result = str.substring(str.indexOf(":") + specifiedElement.length);
-
-console.log(result);
