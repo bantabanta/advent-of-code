@@ -1,5 +1,4 @@
 const fs = require("fs");
-const { log } = require("console");
 
 let data = fs.readFileSync("./input.txt", "utf8").trim().split("\n");
 let test = fs.readFileSync("./test.txt", "utf8").trim().split("\n");
@@ -53,4 +52,11 @@ function partTwo(input) {
   return digits.reduce((a, b) => a + b);
 }
 
-log("Part Two Calibration:", partTwo(data));
+console.log("Part Two Calibration:", partTwo(data));
+
+const inputString = "one:two,three,four,five";
+const specifiedElement = "two";
+
+const result = str.substring(str.indexOf(":") + specifiedElement.length);
+
+console.log(result);

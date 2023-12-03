@@ -9,7 +9,7 @@ function partOne(input) {
   let possibleGames = input.map((line) => {
     let game = Number(line.match(/\d+/)[0]);
 
-    cubePulls = line.split(":")[1].replace(/;/g, ",").split(",");
+    let cubePulls = line.split(":")[1].replace(/;/g, ",").split(",");
 
     let validCount = cubePulls.every((pull) => {
       const count = pull.match(/\d+/);
@@ -25,8 +25,19 @@ function partOne(input) {
 console.log("Part One:", partOne(data));
 
 function partTwo(input) {
-  let cubePower = input.map((line) => {
-    console.log("part two");
+  let cubePowers = input.map((line) => {
+    let cubePulls = line.split(":")[1].replace(/;/g, ",").split(",");
+    let colorMap = { red: 0, green: 0, blue: 0 };
+    cubePulls.forEach((pull) => {
+      const count = Number(pull.match(/\d+/));
+      const color = pull.split(count)[1].trim();
+
+      if (colorMap[color] < count) {
+        colorMap[color] = count;
+      }
+    });
+    return Object.values(colorMap).reduce((acc, c) => acc * c);
   });
+  return cubePowers.reduce((a, b) => a + b);
 }
-console.log("Part Two:", partTwo(test));
+console.log("Part Two:", partTwo(data));
