@@ -2,26 +2,24 @@ const fs = require("fs");
 
 let data = fs.readFileSync("./input.txt", "utf8").trim().split("\n");
 let test = fs.readFileSync("./test.txt", "utf8").trim().split("\n");
-
+let myArr = [];
 function partOne(input) {
   let symbolMap = {};
 
   input.forEach((line, index) => {
-    let syms = line.match(/[^a-zA-Z0-9.\s]/g);
-
-    let symsIndex = syms ? syms.map((symbol) => line.indexOf(symbol)) : [];
-    symbolMap[index] = symsIndex;
-    // if (syms) {
-    //   symsIndex = syms.map((symbol) => line.indexOf(symbol));
-    //   symbolMap[index] = symsIndex;
-    // } else {
-    //   symbolMap[index] = [];
-    // }
+    symbolMap[index] = [];
+    const regex = /[^a-zA-Z0-9.\s]/g;
+    let match;
+    while ((match = regex.exec(line)) !== null) {
+      console.log(typeof match);
+      symbolMap[index].push(match.index);
+    }
   });
+  console.log(symbolMap);
+  return;
 
   let parts = input.map((line, index) => {
     let nums = line.match(/\d+/g);
-    console.log("nums line", index, nums);
 
     if (nums) {
       validParts = nums.map((num) => {
@@ -51,19 +49,22 @@ function partOne(input) {
           ) {
             return parseInt(num);
           } else {
-            console.log(symbolMap[index - 1]);
             return 0;
           }
         }
       });
     }
 
-    // console.log("valid parts", index, validParts, "\n");
+    console.log(index + 1, validParts);
     return !nums ? 0 : validParts.reduce((a, b) => a + b);
+    if (nums) {
+      myArr.push(validParts);
+    }
     let result = !nums ? 0 : validParts.reduce((a, b) => a + b);
     validParts = [];
     return result;
   });
+
   return parts.reduce((a, b) => a + b);
 }
 
